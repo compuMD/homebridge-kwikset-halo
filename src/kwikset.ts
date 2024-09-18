@@ -230,7 +230,7 @@ export const apiRequest = async (log, opts: { path: string; method: string; body
   
   let apiResponse;
   try {
-      apiResponsefetch(`https://${constants.API_HOST}/${opts.path}`, {
+      apiResponse = fetch(`https://${constants.API_HOST}/${opts.path}`, {
       method: opts.method,
       headers: apiHeaders,
       body: opts.body,
