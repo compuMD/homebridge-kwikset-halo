@@ -227,12 +227,19 @@ export const apiRequest = async (log, opts: { path: string; method: string; body
     'Accept-Encoding': 'gzip',
     Authorization: `Bearer ${idToken}`,
   };
-
-  return fetch(`https://${constants.API_HOST}/${opts.path}`, {
-    method: opts.method,
-    headers: apiHeaders,
-    body: opts.body,
-  });
+  
+  let apiResponse;
+  try {
+      apiResponsefetch(`https://${constants.API_HOST}/${opts.path}`, {
+      method: opts.method,
+      headers: apiHeaders,
+      body: opts.body,
+    });;
+    } catch (err) {
+      log.error(`Network error.  Trying again on next polling interval.`);
+      return false;
+    }
+  return apiResponse;
 };
 
 export const fetchDevices = (log, homeId) => {
