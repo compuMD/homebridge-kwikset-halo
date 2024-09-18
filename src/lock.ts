@@ -101,6 +101,9 @@ export class KwiksetHaloAccessory {
           default:
             lockStatus = this.platform.Characteristic.LockCurrentState.UNKNOWN;
         }
+        .catch((response) => {
+        log.error(response.status, response.statusText);
+        })
 
         this.service.updateCharacteristic(
           this.platform.Characteristic.LockCurrentState,
